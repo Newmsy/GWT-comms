@@ -36,8 +36,8 @@ export const Layout = (props) => {
                 <li>
                   {isSignedIn && (
                     <a
-                      className="nav-link px-2 text-white fs-6"
-                      style={{ marginLeft: 40 }}
+                      className="nav-link px-2 text-white fs-3"
+                      style={{ marginLeft: 200 }}
                     >
                       {emailAddress}
                     </a>
@@ -56,6 +56,7 @@ export const Layout = (props) => {
                       eventInfo: { date: new Date() },
                     });
                   }}
+                  disabled={!isSignedIn}
                 >
                   Create Event
                 </button>
