@@ -8,7 +8,7 @@ export const StatusCodes = {
   NOT_FOUND: 404,
 };
 
-const baseUrl = "https://localhost:7066";
+const baseUrl = "http://localhost:7065";
 
 class ApiClient {
   *get(url, shouldHandleErrors = true) {
@@ -23,11 +23,11 @@ class ApiClient {
     return response;
   }
 
-  *post(url, body, shouldHandleErrors = true, headers = {}) {
+  *post(url, body, shouldHandleErrors = true) {
     yield console.log("called post");
     const response = yield this.authorisedFetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json", ...headers },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
 
@@ -147,8 +147,6 @@ class HookApiClient {
 
   async authorisedFetch(url, options) {
     if (options.headers == null) options.headers = {};
-
-    options.headers.Authorization = `Bearer ${this.token}`;
 
     return await fetch(`${this.getBaseUrl()}${url}`, options);
   }
