@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid.Working.Web", "Hybrid.Working.Web.csproj", "{F69E1BCE-8DA0-48CF-92A4-C0440271EB9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hybrid.Working.Web", "Hybrid.Working.Web.csproj", "{F69E1BCE-8DA0-48CF-92A4-C0440271EB9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid.Working.Application", "..\Hybrid.Working.Application\Hybrid.Working.Application.csproj", "{2EE0FB47-2564-4793-A236-76033CE7E0A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hybrid.Working.Application", "..\Hybrid.Working.Application\Hybrid.Working.Application.csproj", "{2EE0FB47-2564-4793-A236-76033CE7E0A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid.Working.Domain", "..\Hybrid.Working.Domain\Hybrid.Working.Domain.csproj", "{977BE983-2877-449F-BF41-BF1E44B2DFAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hybrid.Working.Domain", "..\Hybrid.Working.Domain\Hybrid.Working.Domain.csproj", "{977BE983-2877-449F-BF41-BF1E44B2DFAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid.Working.Infrastructure", "..\Hybrid.Working.Infrastructure\Hybrid.Working.Infrastructure.csproj", "{75A13CCD-3059-4D68-938A-F5F1599BE56E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hybrid.Working.Infrastructure", "..\Hybrid.Working.Infrastructure\Hybrid.Working.Infrastructure.csproj", "{75A13CCD-3059-4D68-938A-F5F1599BE56E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4C3288D7-843B-4196-A69E-3DE1DC20E195}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{75A13CCD-3059-4D68-938A-F5F1599BE56E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75A13CCD-3059-4D68-938A-F5F1599BE56E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75A13CCD-3059-4D68-938A-F5F1599BE56E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C3288D7-843B-4196-A69E-3DE1DC20E195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C3288D7-843B-4196-A69E-3DE1DC20E195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C3288D7-843B-4196-A69E-3DE1DC20E195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C3288D7-843B-4196-A69E-3DE1DC20E195}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
