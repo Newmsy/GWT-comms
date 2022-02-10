@@ -7,12 +7,9 @@ function* createEventWorker(action) {
 
   console.log("Called worker");
 
-  const response = yield apiClient.post(
-    "/api/events/create",
-    {
-      userId: action.payload.userId,
-      eventInfo: action.payload.eventInfo,
-    },
+  const response = yield apiClient.get(
+    "/api/CalendarEvent/9b6b3ae7-7eeb-489d-a4e4-c8ea48dec0b4",
+
     false
   );
   if (response?.ok) {

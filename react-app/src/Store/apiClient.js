@@ -8,7 +8,7 @@ export const StatusCodes = {
   NOT_FOUND: 404,
 };
 
-const baseUrl = "https://localhost:5010";
+const baseUrl = "https://localhost:7066";
 
 class ApiClient {
   *get(url, shouldHandleErrors = true) {
