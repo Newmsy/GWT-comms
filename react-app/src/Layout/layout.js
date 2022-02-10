@@ -1,6 +1,9 @@
 import React from "react";
+import { useCreateEvent } from "../Store/Areas/Events/CreateEvent/hooks";
 
 export const Layout = (props) => {
+  const { createEvent } = useCreateEvent();
+
   return (
     <div>
       <div
@@ -16,6 +19,17 @@ export const Layout = (props) => {
         >
           Hybrid Calendar{" "}
         </p>
+        <button
+          onClick={() =>
+            createEvent({
+              userId: "1",
+              emailAddress: "test",
+              eventInfo: { date: new Date() },
+            })
+          }
+        >
+          Create The event
+        </button>
       </div>
       {props.children}
     </div>
