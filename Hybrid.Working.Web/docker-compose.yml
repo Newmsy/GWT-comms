@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  hybrid.working.web:
+    image: ${DOCKER_REGISTRY-}hybridworkingweb
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  hybrid.working.db:
+    image: "mcr.microsoft.com/mssql/server"
