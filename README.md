@@ -12,7 +12,13 @@ dotnet dev-certs https --trust
 Get event calendar (GET)
 
 ```
-~/api/CalendarEvent/{event calendar ID | GUID}
+~/api/CalendarEvent/{id | GUID}
+```
+
+Get all events calendar (GET)
+
+```
+~/api/CalendarEvent/getall/{date | DATE | Optional} (2020-12-01T00:00:00)
 ```
 
 Create event calendar (POST)
@@ -22,5 +28,14 @@ Create event calendar (POST)
 Body
 {
 EventJson: string
+Date: date
 }
+```
+
+# Front-end
+
+```
+cd react-app
+npm i
+npm start
 ```

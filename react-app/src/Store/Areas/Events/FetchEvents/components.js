@@ -5,12 +5,19 @@ import { getEventsActions, getEventsStateSelector } from "./state";
 
 export const EventsListener = () => {
   const dispatch = useDispatch();
-  const { loading, fetched } = useSelector(getEventsStateSelector);
+  const { loading, fetched, events, viewDate } = useSelector(
+    getEventsStateSelector
+  );
   const { isSignedIn } = useSelector(userStateSelector);
 
-  //   React.useEffect(() => {
-  //     if (!fetched && !loading && isSignedIn)
-  //       dispatch(getEventsActions.fetchEvents());
-  //   });
+  console.log(events);
+  React.useEffect(() => {
+    if (!fetched && !loading && isSignedIn)
+      dispatch(getEventsActions.fetchEvents());
+  }, [dispatch, fetched, isSignedIn, loading]);
+
+  React.useEffect(() => {
+    dispatch(getEventsActions.fetchEvents());
+  }, [dispatch, viewDate]);
   return <div />;
 };

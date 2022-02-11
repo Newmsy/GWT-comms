@@ -12,13 +12,15 @@ import {
   Divider,
   Drawer,
 } from "@mui/material";
-import { getTreeViewUtilityClass, StaticDatePicker } from "@mui/lab";
+import { StaticDatePicker } from "@mui/lab";
 
 //Not being uconst drawerWidth = 240;
 const drawerWidth = 400;
 
 export const Sidebar = ({ setViewDate }) => {
   const [date, setDate] = React.useState(new Date());
+  const [location, setLocation] = React.useState("CSQ");
+  const [department, setDepartment] = React.useState("Technology");
 
   return (
     <Box
@@ -51,7 +53,10 @@ export const Sidebar = ({ setViewDate }) => {
       <Box style={{ width: "100%" }} paddingLeft={4}>
         <p style={{ fontSize: 30, marginTop: 30 }}>Location</p>
         <Select
-          onChange={(newValue) => {}}
+          onChange={(e) => {
+            setLocation(e.target.value);
+          }}
+          value={location}
           style={{ width: 250, marginBottom: 30 }}
         >
           <MenuItem value={"CSQ"}>CSQ</MenuItem>
@@ -61,12 +66,18 @@ export const Sidebar = ({ setViewDate }) => {
           <MenuItem value={"Malta"}>Malta</MenuItem>
         </Select>
         <p style={{ fontSize: 30 }}>Department</p>
-        <Select onChange={(newValue) => {}} style={{ width: 250 }}>
-          <MenuItem value={"CSQ"}>Technology</MenuItem>
-          <MenuItem value={"Manchester"}>FS</MenuItem>
-          <MenuItem value={"Birmingham"}>Audit</MenuItem>
-          <MenuItem value={"Watford"}>Risk</MenuItem>
-          <MenuItem value={"Malta"}>Tax & Legal</MenuItem>
+        <Select
+          style={{ width: 250 }}
+          onChange={(e) => {
+            setDepartment(e.target.value);
+          }}
+          value={department}
+        >
+          <MenuItem value={"Technology"}>Technology</MenuItem>
+          <MenuItem value={"FS"}>FS</MenuItem>
+          <MenuItem value={"Audit"}>Audit</MenuItem>
+          <MenuItem value={"Risk"}>Risk</MenuItem>
+          <MenuItem value={"Tax & Legal"}>Tax & Legal</MenuItem>
         </Select>
       </Box>
     </Box>

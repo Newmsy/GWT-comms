@@ -15,23 +15,29 @@ import { dummyData } from "../../constants";
 import { FormatDateString, filterByDay } from "../../Utils/DateUtils";
 import DoneIcon from "@mui/icons-material/Done";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { useSavedEvents } from "../../Store/Areas/Events/SavedEvents/hooks";
+import { useSignInUser } from "../../Store/Areas/User/hooks";
 
+const colours = [
+  "#112F8F",
+  "#205BBB",
+  "#480B6B",
+  "#3BBAB5",
+  "#6C1B7A",
+  "#318FDD",
+  "#49329C",
+];
 const getRandomColor = () => {
-  const colours = [
-    "#112F8F",
-    "#205BBB",
-    "#480B6B",
-    "#3BBAB5",
-    "#6C1B7A",
-    "#318FDD",
-    "#49329C",
-  ];
   return colours[Math.floor(Math.random() * colours.length)];
 };
 
 export const Calendar = () => {
   const { viewDate, filteredEvents } = useEvents();
   const styles = useStyles();
+  const { events: savedEvents, addEvent, removeEvent } = useSavedEvents();
+  const { isSignedIn } = useSignInUser();
+
+  console.log(filteredEvents({ date: viewDate }));
 
   const [selfInterested, setSelfInterested] = React.useState(null);
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -46,46 +52,46 @@ export const Calendar = () => {
       <Grid container spacing={2} style={{ justifyContent: "center" }}>
         <Grid item container spacing={2} xs={11}>
           {/* {filteredEvents.map(x => ...)} */}
-          <Grid item xs={3}>
-            <div
-              className={styles.eventItem}
-              style={{ backgroundColor: getRandomColor() }}
-            >
-              <p className={styles.title}>Title</p>
-              <p className={styles.desc}>Date: Date</p>
-              <p className={styles.desc}>Description</p>
-            </div>
-          </Grid>
-          <Grid item xs={3}>
-            <div
-              className={styles.eventItem}
-              style={{ backgroundColor: getRandomColor() }}
-            >
-              <p className={styles.title}>Title</p>
-              <p className={styles.desc}>Date: Date</p>
-              <p className={styles.desc}>Description</p>
-            </div>
-          </Grid>
-          <Grid item xs={3}>
-            <div
-              className={styles.eventItem}
-              style={{ backgroundColor: getRandomColor() }}
-            >
-              <p className={styles.title}>Title</p>
-              <p className={styles.desc}>Date: Date</p>
-              <p className={styles.desc}>Description</p>
-            </div>
-          </Grid>
-          <Grid item xs={3}>
-            <div
-              className={styles.eventItem}
-              style={{ backgroundColor: getRandomColor() }}
-            >
-              <p className={styles.title}>Title</p>
-              <p className={styles.desc}>Date: Date</p>
-              <p className={styles.desc}>Description</p>
-            </div>
-          </Grid>
+          {filteredEvents({ date: viewDate }).map((event, i) => {
+            return (
+              <Grid item xs={3} key={event.events.title}>
+                <div
+                  className={styles.eventItem}
+                  style={{ backgroundColor: colours[i] }}
+                >
+                  <p className={styles.title}>{event.events.title}</p>
+                  <p className={styles.desc}>
+                    Date: {FormatDateString(event.date)}
+                  </p>
+                  <p className={styles.desc}>{event.events.description}</p>
+                  <button
+                    type="button"
+                    className={`btn btn-${
+                      savedEvents.filter(
+                        (e) => e.events.title === event.events.title
+                      ).length > 0
+                        ? "danger"
+                        : "light"
+                    }`}
+                    onClick={() => {
+                      savedEvents.filter(
+                        (e) => e.events.title === event.events.title
+                      ).length > 0
+                        ? removeEvent(event.events.title)
+                        : addEvent(event);
+                    }}
+                    disabled={!isSignedIn}
+                  >
+                    {savedEvents.filter(
+                      (e) => e.events.title === event.events.title
+                    ).length > 0
+                      ? "Remove from saved events"
+                      : "Add to saved events"}
+                  </button>
+                </div>
+              </Grid>
+            );
+          })}
         </Grid>
       </Grid>
       <Paper
@@ -186,10 +192,12 @@ const useStyles = makeStyles({
     alignItems: "center",
     flexDirection: "column",
     borderRadius: 10,
+    padding: 10,
   },
   title: {
     color: "#fff",
     fontSize: 30,
+    textAlign: "center",
   },
   titleB: {
     color: "#000",

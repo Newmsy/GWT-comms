@@ -6,6 +6,7 @@ namespace Hybrid.Working.Application.CalendarEvent.Create
     public class CreateCalendarEventRequest : IRequest<Response>
     {
         public string? EventJson { get; set; }
+        public DateTime? Date { get; set; }
     }
 
     public class CreateCalendarEventHandler : IRequestHandler<CreateCalendarEventRequest, Response>
@@ -22,6 +23,7 @@ namespace Hybrid.Working.Application.CalendarEvent.Create
             _context.CalendarEvents.Add(new Domain.Entities.CalendarEvent
             {
                 Json = request.EventJson,
+                Date = request.Date,
             });
 
             await _context.SaveChangesAsync(cancellationToken);
