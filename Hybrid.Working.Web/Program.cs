@@ -3,12 +3,23 @@ using Hybrid.Working.Infrastructure;
 using Hybrid.Working.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:3000").AllowAnyHeader()
+                            .AllowAnyMethod();;
+                      });
+});
 
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
 
 if (app.Environment.IsDevelopment())
 {

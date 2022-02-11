@@ -8,10 +8,9 @@ function* createEventWorker(action) {
   console.log("Called worker");
 
   const response = yield apiClient.post(
-    "/api/events/create",
+    "/api/CalendarEvent",
     {
-      userId: action.payload.userId,
-      eventInfo: action.payload.eventInfo,
+      eventJson: JSON.stringify(action.payload.eventInfo),
     },
     false
   );

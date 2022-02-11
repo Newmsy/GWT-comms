@@ -2,15 +2,20 @@ import React from "react";
 import { useCreateEvent } from "../Store/Areas/Events/CreateEvent/hooks";
 import { useSignInUser } from "../Store/Areas/User/hooks";
 import { SignInModal } from "../Components/SignInModal";
+import { CreateEventModal } from "../Components/CreateEventModal";
 import { Sidebar } from "./sidebar";
+import { Box } from "@mui/material";
+import { useEvents } from "../Store/Areas/Events/FetchEvents/hooks";
 
 export const Layout = (props) => {
   const { createEvent } = useCreateEvent();
+
+  const { setViewDate, fetchEvents } = useEvents();
   const { isSignedIn, signIn, loadingSignIn, emailAddress, signOut } =
     useSignInUser();
 
   const [signInOpen, setSignInOpen] = React.useState(false);
-  console.log(isSignedIn);
+  const [createEventOpen, setCreateEventOpen] = React.useState(false);
 
   return (
     <div>
@@ -20,7 +25,12 @@ export const Layout = (props) => {
         onSubmit={signIn}
         onClose={() => setSignInOpen(false)}
       />
-      <div style={{ maxWidth: "100vw" }}>
+      <CreateEventModal
+        open={isSignedIn && createEventOpen}
+        onClose={() => setCreateEventOpen(false)}
+        onSubmit={createEvent}
+      />
+      <div style={{ maxWidth: "100vw", zIndex: 100 }}>
         <header
           className="p-3 text-white"
           style={{ backgroundColor: "#00338d", width: "100vw", padding: 0 }}
@@ -50,11 +60,7 @@ export const Layout = (props) => {
                   type="button"
                   className="btn btn-light me-4"
                   onClick={() => {
-                    createEvent({
-                      emailAddress: "TestUser@Test.com",
-                      userId: "",
-                      eventInfo: { date: new Date() },
-                    });
+                    setCreateEventOpen(true);
                   }}
                   disabled={!isSignedIn}
                 >
@@ -76,8 +82,10 @@ export const Layout = (props) => {
           </div>
         </header>
       </div>
-
-      {props.children}
+      <Box display="flex" flexDirection="row" style={{ width: "100vw" }}>
+        <Sidebar setViewDate={setViewDate} />
+        {props.children}
+      </Box>
     </div>
   );
 };

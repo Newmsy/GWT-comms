@@ -1,170 +1,74 @@
 import React from "react";
+import {
+  Modal,
+  Box,
+  Paper,
+  Input,
+  TextField,
+  Select,
+  MenuItem,
+  Radio,
+  Slide,
+  Divider,
+  Drawer,
+} from "@mui/material";
+import { getTreeViewUtilityClass, StaticDatePicker } from "@mui/lab";
 
-//Not being used at the moment
+//Not being uconst drawerWidth = 240;
+const drawerWidth = 400;
 
-export const Sidebar = () => {
+export const Sidebar = ({ setViewDate }) => {
+  const [date, setDate] = React.useState(new Date());
+
   return (
-    <div
-      className="d-flex flex-column align-items-stretch flex-shrink-0 bg-white"
-      style="width: 380px;"
+    <Box
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+          boxSizing: "border-box",
+        },
+        zIndex: 0,
+        height: "100vh",
+        borderRight: "solid 2px",
+        boxShadow: "0px 0px 5px #888888",
+        borderColor: "#bdbdbd",
+      }}
     >
-      <a
-        href="/"
-        className="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom"
-      >
-        <span className="fs-5 fw-semibold">List group</span>
-      </a>
-      <div className="list-group list-group-flush border-bottom scrollarea">
-        <a
-          href="#"
-          className="list-group-item list-group-item-action active py-3 lh-tight"
-          aria-current="true"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small>Wed</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Tues</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Mon</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
+      <StaticDatePicker
+        onChange={(newValue) => {
+          setDate(newValue);
+          setViewDate(newValue);
+        }}
+        displayStaticWrapperAs="desktop"
+        renderInput={(params) => <TextField {...params} />}
+        value={date}
+        style={{ backgroundColor: "#5789de" }}
+      />
+      <Divider />
 
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-          aria-current="true"
+      <Box style={{ width: "100%" }} paddingLeft={4}>
+        <p style={{ fontSize: 30, marginTop: 30 }}>Location</p>
+        <Select
+          onChange={(newValue) => {}}
+          style={{ width: 250, marginBottom: 30 }}
         >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Wed</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Tues</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Mon</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-          aria-current="true"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Wed</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Tues</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Mon</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-          aria-current="true"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Wed</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Tues</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-        <a
-          href="#"
-          className="list-group-item list-group-item-action py-3 lh-tight"
-        >
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1">List group item heading</strong>
-            <small className="text-muted">Mon</small>
-          </div>
-          <div className="col-10 mb-1 small">
-            Some placeholder content in a paragraph below the heading and date.
-          </div>
-        </a>
-      </div>
-    </div>
+          <MenuItem value={"CSQ"}>CSQ</MenuItem>
+          <MenuItem value={"Manchester"}>Manchester</MenuItem>
+          <MenuItem value={"Birmingham"}>Birmingham</MenuItem>
+          <MenuItem value={"Watford"}>Watford</MenuItem>
+          <MenuItem value={"Malta"}>Malta</MenuItem>
+        </Select>
+        <p style={{ fontSize: 30 }}>Department</p>
+        <Select onChange={(newValue) => {}} style={{ width: 250 }}>
+          <MenuItem value={"CSQ"}>Technology</MenuItem>
+          <MenuItem value={"Manchester"}>FS</MenuItem>
+          <MenuItem value={"Birmingham"}>Audit</MenuItem>
+          <MenuItem value={"Watford"}>Risk</MenuItem>
+          <MenuItem value={"Malta"}>Tax & Legal</MenuItem>
+        </Select>
+      </Box>
+    </Box>
   );
 };
