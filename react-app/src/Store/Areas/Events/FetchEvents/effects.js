@@ -1,21 +1,23 @@
 import { takeLatest, put } from "redux-saga/effects";
 import { getEventsActions } from "./state";
 import { ApiClient } from "../../../apiClient";
+import { ParseApiDateString } from "../../../../Utils/DateUtils";
 
-function* fetchEventsWorker(action) {
+function* fetchEventsWorker() {
   const apiClient = new ApiClient();
 
-  const response = yield apiClient.get("/api/CalendarEvent/all", false);
+  const response = yield apiClient.get("/api/CalendarEvent/getall", false);
+
   if (response?.ok) {
     const data = yield response.json();
-    if (data.length > 0)
-      yield put(
-        getEventsActions.fetchEventsSuccess({
-          events: data.data.map((x) => {
-            return { event: JSON.parse(x.EventsInfo), date: x.date };
-          }),
-        })
-      );
+
+    const eventData = yield data.data.map((x) => {
+      return { events: JSON.parse(x.json), date: ParseApiDateString(x.date) };
+    });
+    yield console.log(eventData);
+
+    if (eventData.length > 0)
+      yield put(getEventsActions.fetchEventsSuccess({ events: eventData }));
   }
 }
 

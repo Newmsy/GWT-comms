@@ -15,6 +15,7 @@ export const useSavedEvents = () => {
 
   const removeEvent = React.useCallback(
     (title) => {
+      console.log(title);
       dispatch(savedEventsActions.removeEventByTitle(title));
     },
     [dispatch]

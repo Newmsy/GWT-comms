@@ -13,7 +13,7 @@ const savedEventsSlice = createSlice({
     },
     removeEventByTitle(state, action) {
       state.events = state.events.filter(
-        (x) => (x.title = action.payload.title)
+        (x) => (x.events.title = action.payload.title)
       );
     },
   },

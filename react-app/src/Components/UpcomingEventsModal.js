@@ -80,9 +80,9 @@ export const SavedEventsModal = ({ open, onClose }) => {
               <div>
                 <Divider />
                 <Box>
-                  <p style={{ fontSize: 30 }}>{event.title}</p>
+                  <p style={{ fontSize: 30 }}>{event.events.title}</p>
                   <p style={{ fontSize: 20 }}>{FormatDateString(event.date)}</p>
-                  <p style={{ fontSize: 20 }}>{event.description}</p>
+                  <p style={{ fontSize: 20 }}>{event.events.description}</p>
                 </Box>
               </div>
             );

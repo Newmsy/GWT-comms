@@ -9,12 +9,11 @@ export const useCreateEvent = () => {
   );
 
   const createEvent = React.useCallback(
-    ({ emailAddress, userId, eventInfo }) => {
+    ({ date, eventInfo }) => {
       console.log("Called create event");
       dispatch(
         createEventActions.createEvent({
-          emailAddress: emailAddress,
-          userId: userId,
+          date: date,
           eventInfo: eventInfo,
         })
       );
