@@ -4,17 +4,17 @@ import { Box, Grid, Paper, Input } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { FormatDateString } from "../../Utils/DateUtils";
 import { useSavedEvents } from "../../Store/Areas/Events/SavedEvents/hooks";
-
+import { useSignInUser } from "../../Store/Areas/User/hooks";
+const colours = [
+  "#112F8F",
+  "#205BBB",
+  "#480B6B",
+  "#3BBAB5",
+  "#6C1B7A",
+  "#318FDD",
+  "#49329C",
+];
 const getRandomColor = () => {
-  const colours = [
-    "#112F8F",
-    "#205BBB",
-    "#480B6B",
-    "#3BBAB5",
-    "#6C1B7A",
-    "#318FDD",
-    "#49329C",
-  ];
   return colours[Math.floor(Math.random() * colours.length)];
 };
 
@@ -43,7 +43,8 @@ const defaultEvents = [
 export const Calendar = () => {
   const { viewDate, filteredEvents } = useEvents();
   const styles = useStyles();
-  const { events, addEvent } = useSavedEvents();
+  const { events, addEvent, removeEvent } = useSavedEvents();
+  const { isSignedIn } = useSignInUser();
 
   return (
     <div style={{ width: "100%", backgroundColor: "#f2f2f2" }}>
@@ -53,12 +54,12 @@ export const Calendar = () => {
       <Grid container spacing={2} style={{ justifyContent: "center" }}>
         <Grid item container spacing={2} xs={11}>
           {/* {filteredEvents.map(x => ...)} */}
-          {defaultEvents.map((event) => {
+          {defaultEvents.map((event, i) => {
             return (
               <Grid item xs={3} key={event.title}>
                 <div
                   className={styles.eventItem}
-                  style={{ backgroundColor: getRandomColor() }}
+                  style={{ backgroundColor: colours[i] }}
                 >
                   <p className={styles.title}>{event.title}</p>
                   <p className={styles.desc}>
@@ -67,12 +68,21 @@ export const Calendar = () => {
                   <p className={styles.desc}>{event.description}</p>
                   <button
                     type="button"
-                    className={`btn btn-light`}
+                    className={`btn btn-${
+                      events.filter((e) => e.title === event.title).length > 0
+                        ? "danger"
+                        : "light"
+                    }`}
                     onClick={() => {
-                      addEvent(event);
+                      events.filter((e) => e.title === event.title).length > 0
+                        ? removeEvent(event.title)
+                        : addEvent(event);
                     }}
+                    disabled={!isSignedIn}
                   >
-                    Add to saved events
+                    {events.filter((e) => e.title === event.title).length > 0
+                      ? "Remove from saved events"
+                      : "Add to saved events"}
                   </button>
                 </div>
               </Grid>

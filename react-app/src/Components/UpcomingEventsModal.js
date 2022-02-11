@@ -71,7 +71,7 @@ export const SavedEventsModal = ({ open, onClose }) => {
             <p style={{ fontSize: 20 }}>13 Feb 2022</p>
             <p style={{ fontSize: 20 }}>
               Lino will be cooking breakfast for the whole team! Put your orders
-              in soon. Starts at 8:00 on the 13th floor os CSQ!
+              in soon. Starts at 8:00 on the 13th floor of CSQ!
             </p>
           </Box>
 
