@@ -1,9 +1,20 @@
 import React from "react";
 import { useEvents } from "../../Store/Areas/Events/FetchEvents/hooks";
-import { Box, Grid, Paper, Input, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Paper,
+  Input,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { dummyData } from "../../constants";
-import { FormatDateString } from "../../Utils/DateUtils";
+import { FormatDateString, filterByDay } from "../../Utils/DateUtils";
+import DoneIcon from "@mui/icons-material/Done";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const getRandomColor = () => {
   const colours = [
@@ -21,6 +32,11 @@ const getRandomColor = () => {
 export const Calendar = () => {
   const { viewDate, filteredEvents } = useEvents();
   const styles = useStyles();
+
+  const [selfInterested, setSelfInterested] = React.useState(null);
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  console.log(filterByDay(viewDate, dummyData.data));
 
   return (
     <div style={{ width: "100%", backgroundColor: "#f2f2f2" }}>
@@ -92,41 +108,70 @@ export const Calendar = () => {
             <button
               type="button"
               className="btn btn-warning me-4"
-              onClick={() => {}}
+              onClick={() => {
+                setSelfInterested("interested");
+              }}
             >
               Interested
             </button>
             <button
               type="button"
               className="btn btn-success"
-              onClick={() => {}}
+              onClick={() => {
+                setSelfInterested("going");
+              }}
             >
               Going
             </button>
           </div>
         </Box>
-        <Box marginLeft={4} marginTop={4} marginBottom={10}>
-          <Input placeholder="Search..." />
+        <Box marginLeft={4} marginTop={4} marginBottom={4}>
+          <Input
+            placeholder="Search..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
+          />
         </Box>
-        <Box>
-          <List>
+        <Box paddingLeft={4}>
+          <List style={{ width: 300 }}>
             {console.log(dummyData)}
-            {
-              dummyData.data.map(day => {
+            {filterByDay(viewDate, dummyData.data)[0]
+              ?.people.filter((person) => person.name.includes(searchTerm))
+              .map((person) => {
                 return (
-                  <>
-                  <ListItem
-                  />
+                  <ListItem>
+                    <ListItemIcon>
+                      {person.interested ? (
+                        <ErrorOutlineIcon style={{ color: "#F9C108" }} />
+                      ) : (
+                        <DoneIcon style={{ color: "green" }} />
+                      )}
+                    </ListItemIcon>
                     <ListItemText
-                    primary={day.name}
-                    secondary={day.attending}
-                    key={day}
-                    >
-                    </ListItemText>
-                  <ListItem />
-                  </>
+                      primary={person.name}
+                      secondary={person.interested ? "Interested" : "Going"}
+                      key={person.name}
+                    />
+                  </ListItem>
                 );
               })}
+            {selfInterested && (
+              <ListItem>
+                <ListItemIcon>
+                  {selfInterested === "interested" ? (
+                    <ErrorOutlineIcon style={{ color: "#F9C108" }} />
+                  ) : (
+                    <DoneIcon style={{ color: "green" }} />
+                  )}
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Alex Newman"}
+                  secondary={
+                    selfInterested === "interested" ? "Interested" : "Going"
+                  }
+                />
+              </ListItem>
+            )}
           </List>
         </Box>
       </Paper>
