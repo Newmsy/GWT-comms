@@ -6,6 +6,7 @@ export const initialState = {
   loading: false,
   fetched: false,
   events: {},
+  viewDate: new Date(),
 };
 
 const getEventsSlice = createSlice({
@@ -19,6 +20,9 @@ const getEventsSlice = createSlice({
       state.loading = false;
       state.fetched = true;
       state.events = action.payload.events;
+    },
+    setViewDate(state, action) {
+      state.viewDate = action.payload;
     },
   },
 });
