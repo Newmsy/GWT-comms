@@ -1,7 +1,8 @@
 import React from "react";
 import { useEvents } from "../../Store/Areas/Events/FetchEvents/hooks";
-import { Box, Grid, Paper, Input } from "@mui/material";
+import { Box, Grid, Paper, Input, List, ListItem, ListItemText } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { dummyData } from "../../constants";
 import { FormatDateString } from "../../Utils/DateUtils";
 
 const getRandomColor = () => {
@@ -106,6 +107,27 @@ export const Calendar = () => {
         </Box>
         <Box marginLeft={4} marginTop={4} marginBottom={10}>
           <Input placeholder="Search..." />
+        </Box>
+        <Box>
+          <List>
+            {console.log(dummyData)}
+            {
+              dummyData.data.map(day => {
+                return (
+                  <>
+                  <ListItem
+                  />
+                    <ListItemText
+                    primary={day.name}
+                    secondary={day.attending}
+                    key={day}
+                    >
+                    </ListItemText>
+                  <ListItem />
+                  </>
+                );
+              })}
+          </List>
         </Box>
       </Paper>
     </div>
