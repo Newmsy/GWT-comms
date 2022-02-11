@@ -10,5 +10,7 @@ namespace Hybrid.Working.Domain.Entities
         public Guid Id { get; set; }
 
         public string? Json { get; set; }
+
+        public DateTime? Date { get; set; }
     }
 }
