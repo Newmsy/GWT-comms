@@ -9,11 +9,11 @@ namespace Hybrid.Working.Application.CalendarEvent.Get
         public Guid CalendarEventId { get; set; }
     }
 
-    public class GetCalendarEventHandler : IRequestHandler<GetCalendarEventRequest, Response<CalendarEventDto>>
+    public class GetCalendarEventsHandler : IRequestHandler<GetCalendarEventRequest, Response<CalendarEventDto>>
     {
         private readonly IApplicationDbContext _context;
 
-        public GetCalendarEventHandler(IApplicationDbContext context)
+        public GetCalendarEventsHandler(IApplicationDbContext context)
         {
             _context = context;
         }
@@ -29,7 +29,8 @@ namespace Hybrid.Working.Application.CalendarEvent.Get
             response.SetData(new CalendarEventDto 
             { 
                 Id = calendarEvent.Id,
-
+                Json = calendarEvent.Json,
+                Date = calendarEvent.Date,
             });
 
             return response;
