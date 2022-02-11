@@ -12,6 +12,7 @@ import { getTreeViewUtilityClass, StaticDatePicker } from "@mui/lab";
 import React from "react";
 import { FormatDateString } from "../Utils/DateUtils";
 import { useToastDispatcher } from "../Store/Areas/Toast/hooks";
+import { useEvents } from "../Store/Areas/Events/FetchEvents/hooks";
 
 const style = {
   position: "absolute",
@@ -32,12 +33,13 @@ export const CreateEventModal = ({ open, onClose, onSubmit }) => {
   const [location, setLocation] = React.useState("CSQ");
   const [isDepartmentWide, setIsDepartmentWide] = React.useState(true);
   const [date, setDate] = React.useState(new Date());
+  const { fetchEvents } = useEvents();
   console.log(location);
 
   const { addToast } = useToastDispatcher();
 
-  const onSubmitEvent = React.useCallback(() => {
-    onSubmit({
+  const onSubmitEvent = React.useCallback(async () => {
+    await onSubmit({
       eventInfo: {
         title: title,
         description: description,
@@ -45,8 +47,10 @@ export const CreateEventModal = ({ open, onClose, onSubmit }) => {
         location: location,
         isDepartmentWide: isDepartmentWide,
       },
+      date: date,
     });
     onClose();
+    fetchEvents();
     addToast(`New event has been created for ${FormatDateString(date)}`);
   }, [
     addToast,

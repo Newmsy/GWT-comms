@@ -6,11 +6,13 @@ function* createEventWorker(action) {
   const apiClient = new ApiClient();
 
   console.log("Called worker");
+  console.log(action.payload);
 
   const response = yield apiClient.post(
     "/api/CalendarEvent",
     {
       eventJson: JSON.stringify(action.payload.eventInfo),
+      date: action.payload.date,
     },
     false
   );

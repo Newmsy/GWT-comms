@@ -5,7 +5,7 @@ export const initialState = {
   emailAddress: "",
   loading: false,
   fetched: false,
-  events: {},
+  events: [],
   viewDate: new Date(),
 };
 
@@ -17,6 +17,7 @@ const getEventsSlice = createSlice({
       state.loading = true;
     },
     fetchEventsSuccess(state, action) {
+      console.log("success");
       state.loading = false;
       state.fetched = true;
       state.events = action.payload.events;

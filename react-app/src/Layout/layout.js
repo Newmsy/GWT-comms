@@ -6,6 +6,7 @@ import { CreateEventModal } from "../Components/CreateEventModal";
 import { Sidebar } from "./sidebar";
 import { Box } from "@mui/material";
 import { useEvents } from "../Store/Areas/Events/FetchEvents/hooks";
+import { SavedEventsModal } from "../Components/UpcomingEventsModal";
 
 export const Layout = (props) => {
   const { createEvent } = useCreateEvent();
@@ -16,6 +17,7 @@ export const Layout = (props) => {
 
   const [signInOpen, setSignInOpen] = React.useState(false);
   const [createEventOpen, setCreateEventOpen] = React.useState(false);
+  const [savedEventsOpen, setSavedEventsOpen] = React.useState(false);
 
   return (
     <div>
@@ -29,6 +31,10 @@ export const Layout = (props) => {
         open={isSignedIn && createEventOpen}
         onClose={() => setCreateEventOpen(false)}
         onSubmit={createEvent}
+      />
+      <SavedEventsModal
+        open={savedEventsOpen}
+        onClose={() => setSavedEventsOpen(false)}
       />
       <div style={{ maxWidth: "100vw", zIndex: 100 }}>
         <header
@@ -56,6 +62,16 @@ export const Layout = (props) => {
               </ul>
 
               <div className="text-end">
+                <button
+                  type="button"
+                  className="btn btn-light me-4"
+                  onClick={() => {
+                    setSavedEventsOpen(true);
+                  }}
+                  disabled={!isSignedIn}
+                >
+                  Upcoming Events
+                </button>
                 <button
                   type="button"
                   className="btn btn-light me-4"

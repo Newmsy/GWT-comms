@@ -31,3 +31,11 @@ EventJson: string
 Date: date
 }
 ```
+
+# Front-end
+
+```
+cd react-app
+npm i
+npm start
+```
