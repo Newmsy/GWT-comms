@@ -8,9 +8,9 @@ export const EventsListener = () => {
   const { loading, fetched } = useSelector(getEventsStateSelector);
   const { isSignedIn } = useSelector(userStateSelector);
 
-  React.useEffect(() => {
-    if (!fetched && !loading && isSignedIn)
-      dispatch(getEventsActions.fetchEvents());
-  });
+  //   React.useEffect(() => {
+  //     if (!fetched && !loading && isSignedIn)
+  //       dispatch(getEventsActions.fetchEvents());
+  //   });
   return <div />;
 };

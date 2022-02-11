@@ -5,7 +5,7 @@ export const initialState = {
   emailAddress: "",
   loading: false,
   fetched: false,
-  events: {},
+  events: [],
   viewDate: new Date(),
 };
 

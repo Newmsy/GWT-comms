@@ -10,7 +10,11 @@ function* fetchEventsWorker(action) {
     const data = yield response.json();
     if (data.length > 0)
       yield put(
-        getEventsActions.fetchEventsSuccess({ events: JSON.parse(data) })
+        getEventsActions.fetchEventsSuccess({
+          events: data.data.map((x) => {
+            return { event: JSON.parse(x.EventsInfo), date: x.date };
+          }),
+        })
       );
   }
 }
