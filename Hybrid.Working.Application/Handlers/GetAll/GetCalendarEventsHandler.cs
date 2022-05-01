@@ -43,7 +43,9 @@ namespace Hybrid.Working.Application.CalendarEvent.GetAll
             return new CalendarEventDto
             {
                 Id = calendarEvent.Id,
-                Json = calendarEvent.Json,
+                Title = calendarEvent.Title,
+                Description = calendarEvent.Description,
+                FileId = calendarEvent.FileId,
                 Date = calendarEvent.Date,
             };
         }

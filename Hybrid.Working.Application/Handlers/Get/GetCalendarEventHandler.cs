@@ -29,7 +29,9 @@ namespace Hybrid.Working.Application.CalendarEvent.Get
             response.SetData(new CalendarEventDto 
             { 
                 Id = calendarEvent.Id,
-                Json = calendarEvent.Json,
+                Description = calendarEvent.Description,
+                Title = calendarEvent.Title,
+                FileId = calendarEvent.FileId,
                 Date = calendarEvent.Date,
             });
 

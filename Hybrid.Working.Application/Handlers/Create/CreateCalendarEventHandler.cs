@@ -5,7 +5,9 @@ namespace Hybrid.Working.Application.CalendarEvent.Create
 {
     public class CreateCalendarEventRequest : IRequest<Response>
     {
-        public string? EventJson { get; set; }
+        public string Title { get; set; }
+        public string? Description { get; set; }
+        public Guid? FileId { get; set; }
         public DateTime? Date { get; set; }
     }
 
@@ -22,7 +24,9 @@ namespace Hybrid.Working.Application.CalendarEvent.Create
         {
             _context.CalendarEvents.Add(new Domain.Entities.CalendarEvent
             {
-                Json = request.EventJson,
+                Title = request.Title,
+                Description = request.Description,
+                FileId = request.FileId,
                 Date = request.Date,
             });
 
