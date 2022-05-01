@@ -3,7 +3,7 @@
 ## macOS https setup
 
 ```
-dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p Password123!
+dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p Password@123
 dotnet dev-certs https --trust
 ```
 
@@ -39,3 +39,4 @@ cd react-app
 npm i
 npm start
 ```
+# GWT-comms
