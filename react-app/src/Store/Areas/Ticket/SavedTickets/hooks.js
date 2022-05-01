@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { savedEventsActions, getSavedEventsStateSelector } from "./state";
+import { SavedTicketsActions, getSavedTicketsStateSelector } from "./state";
 
-export const useSavedEvents = () => {
+export const useSavedTickets = () => {
   const dispatch = useDispatch();
-  const { events } = useSelector(getSavedEventsStateSelector);
+  const { events } = useSelector(getSavedTicketsStateSelector);
 
   const addEvent = React.useCallback(
     (event) => {
-      dispatch(savedEventsActions.addEvent(event));
+      dispatch(SavedTicketsActions.addEvent(event));
     },
     [dispatch]
   );
@@ -16,7 +16,7 @@ export const useSavedEvents = () => {
   const removeEvent = React.useCallback(
     (title) => {
       console.log(title);
-      dispatch(savedEventsActions.removeEventByTitle(title));
+      dispatch(SavedTicketsActions.removeEventByTitle(title));
     },
     [dispatch]
   );

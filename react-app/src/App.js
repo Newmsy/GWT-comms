@@ -1,12 +1,12 @@
 import React from "react";
 import { Layout } from "./Layout/layout";
-import { Calendar } from "./Pages/Calendar";
+import { Calendar } from "./Pages/Home";
 import { configureStore } from "./Store/configureStore";
 import { Provider } from "react-redux";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { Toast } from "./Store/Areas/Toast/components";
-import { EventsListener } from "./Store/Areas/Events/FetchEvents/components";
+import { EventsListener } from "./Store/Areas/Ticket/FetchTickets/components"
 
 const store = configureStore();
 

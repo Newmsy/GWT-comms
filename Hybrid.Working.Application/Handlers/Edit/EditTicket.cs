@@ -1,38 +1,44 @@
 ﻿using Hybrid.Working.Application.Common;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hybrid.Working.Application.CalendarEvent.Create
 {
-    public class CreateTicketRequest : IRequest<Response>
+    public class EditTicketRequest : IRequest<Response>
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int? EtaDays { get; set; }
         public bool IsInSprint { get; set; }
         public string? CreatedBy { get; set; }
+        public string Status { get; set; }
     }
 
-    public class CreateTicketHandler : IRequestHandler<CreateTicketRequest, Response>
+    public class EditTicketHandler : IRequestHandler<EditTicketRequest, Response>
     {
         private readonly IApplicationDbContext _context;
 
-        public CreateTicketHandler(IApplicationDbContext context)
+        public EditTicketHandler(IApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Response> Handle(CreateTicketRequest request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(EditTicketRequest request, CancellationToken cancellationToken)
         {
-            _context.Ticket.Add(new Domain.Entities.Ticket
-            {
-                Description = request.Description,
-                Title = request.Title,
-                Status = "Pending",
-                EtaDays = request.EtaDays,
-                DateAdded = DateTime.Now,
-                IsInSprint = request.IsInSprint,
-                CreatedBy = request.CreatedBy
-            });
+            var ticket = await _context.Ticket.FirstOrDefaultAsync(ticket => ticket.Id == request.Id);
+
+            if (ticket == null) throw new NullReferenceException("Couldn't find that ticket");
+            
+            ticket.Description = request.Description;
+            ticket.Title = request.Title;
+            ticket.IsInSprint = request.IsInSprint;
+            ticket.EtaDays = request.EtaDays;
+            ticket.Status = request.Status;
+            ticket.IsInSprint = request.IsInSprint;
+            ticket.DateUpdated = DateTime.Now;
+            
+            _context.Ticket.Update(ticket);
 
             await _context.SaveChangesAsync(cancellationToken);
 

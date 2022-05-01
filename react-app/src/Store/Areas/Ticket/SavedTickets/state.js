@@ -4,8 +4,8 @@ export const initialState = {
   events: [],
 };
 
-const savedEventsSlice = createSlice({
-  name: "SavedEvents",
+const SavedTicketsSlice = createSlice({
+  name: "SavedTickets",
   initialState,
   reducers: {
     addEvent(state, action) {
@@ -19,8 +19,8 @@ const savedEventsSlice = createSlice({
   },
 });
 
-export const getSavedEventsStateSelector = (state) => state.savedEvents;
+export const getSavedTicketsStateSelector = (state) => state.SavedTickets;
 
-const savedEventsActions = savedEventsSlice.actions;
+const SavedTicketsActions = SavedTicketsSlice.actions;
 
-export { savedEventsActions, savedEventsSlice };
+export { SavedTicketsActions, SavedTicketsSlice };

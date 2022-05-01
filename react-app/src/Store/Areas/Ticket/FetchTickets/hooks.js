@@ -36,7 +36,7 @@ const defaultEvents = [
 
 export const useEvents = () => {
   const dispatch = useDispatch();
-  const { userId, loading, events, viewDate } = useSelector(
+  const {  loading, tickets } = useSelector(
     getEventsStateSelector
   );
 
@@ -51,29 +51,13 @@ export const useEvents = () => {
     [dispatch]
   );
 
-  const filteredEvents = React.useCallback(
-    ({ date }) => {
-      console.log(date);
-      const dayStart = date.setHours(0, 0, 0, 0);
-      const dayEnd = date.setHours(23, 59, 59);
-      return events
-        .concat(defaultEvents)
-        .filter(
-          (e) => new Date(e.date) < dayEnd && new Date(e.date) > dayStart
-        );
-    },
-    [events]
-  );
-
-  console.log(events);
+  
 
   return {
-    userId,
     loading,
-    events,
+    tickets,
     fetchEvents,
     setViewDate,
-    viewDate,
-    filteredEvents,
+    
   };
 };

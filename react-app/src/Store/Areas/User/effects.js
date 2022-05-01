@@ -48,8 +48,7 @@ function* signInUserWorker(action) {
 
   yield put(
     userActions.signInSuccess({
-      userId: "1",
-      emailAddress: action.payload.email,
+      name: action.payload.name,
     })
   );
 }

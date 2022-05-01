@@ -1,7 +1,7 @@
 import { fork } from "redux-saga/effects";
 import { userWatcher, signInUserWatcher } from "./Areas/User/effects";
-import { createEventWatcher } from "./Areas/Events/CreateEvent/effects";
-import { fetchEventsWatcher } from "./Areas/Events/FetchEvents/effects";
+import { createEventWatcher } from "./Areas/Ticket/CreateTicket/effects";
+import { fetchEventsWatcher } from "./Areas/Ticket/FetchTickets/effects";
 
 function* rootSaga() {
   yield fork(userWatcher);

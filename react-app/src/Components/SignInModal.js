@@ -7,7 +7,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  height: 400,
+  height: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -23,11 +23,10 @@ export const SignInModal = ({
   isSignedIn,
 }) => {
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
 
   const onSubmitSignIn = React.useCallback(() => {
-    onSubmit({ email: email, password: password });
-  }, [email, onSubmit, password]);
+    onSubmit({ name: email });
+  }, [email, onSubmit]);
 
   React.useEffect(() => {
     if (isSignedIn) onClose();
@@ -37,13 +36,12 @@ export const SignInModal = ({
     <Modal open={open} onClose={onClose}>
       <Paper sx={style}>
         <Box display="flex" justifyContent="center" flexDirection={"column"}>
-          <p>Email</p>
+          <p>Name</p>
           <Input
             style={{ marginBottom: 30 }}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <p>Password</p>
-          <Input onChange={(e) => setPassword(e.target.value)} />
+         
           <Box
             display="flex"
             justifyContent="flex-end"

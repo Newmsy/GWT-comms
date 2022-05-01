@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hybrid.Working.Web.Controllers
 {
-    [ApiController, Route("api/[controller]")]
+    [ApiController, Route("api")]
     public class ApiControllerBase : ControllerBase
     {
         private ISender? _mediator;

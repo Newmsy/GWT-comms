@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  userId: "",
-  emailAddress: "",
   loading: false,
-  eventInfo: {},
 };
 
 const createEventsSlice = createSlice({

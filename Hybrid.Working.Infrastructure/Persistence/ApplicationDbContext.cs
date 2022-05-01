@@ -11,5 +11,7 @@ namespace Hybrid.Working.Infrastructure.Persistence
         }
 
         public DbSet<CalendarEvent> CalendarEvents => Set<CalendarEvent>();
+        public DbSet<Ticket> Ticket => Set<Ticket>();
+        public DbSet<Files> File => Set<Files>();
     }
 }

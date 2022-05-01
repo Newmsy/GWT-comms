@@ -5,14 +5,14 @@ import { ApiClient } from "../../../apiClient";
 function* createEventWorker(action) {
   const apiClient = new ApiClient();
 
-  console.log("Called worker");
-  console.log(action.payload);
-
   const response = yield apiClient.post(
-    "/api/CalendarEvent",
+    "/api/ticket",
     {
-      eventJson: JSON.stringify(action.payload.eventInfo),
-      date: action.payload.date,
+      title: action.payload.title,
+        description: action.payload.description,
+        isInSprint: action.payload.isInSprint,
+        etaDays:  parseInt(action.payload.etaDays),
+        createdBy: action.payload.createdBy
     },
     false
   );

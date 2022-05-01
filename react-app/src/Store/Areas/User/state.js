@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  userId: undefined,
-  emailAddress: "",
+  name: "",
   loading: false,
   fetched: false,
   isSignedIn: false,
@@ -19,21 +18,21 @@ const userSlice = createSlice({
     fetchUserIdSuccess(state, action) {
       state.loading = false;
       state.fetched = true;
-      state.userId = action.payload.userId;
     },
-    signIn(state) {
+    signIn(state, action) {
       state.loadingSignIn = true;
+      state.name = action.payload.name;
+      state.isSignedIn = true;
+      state.loadingSignIn = false;
     },
     signInSuccess(state, action) {
-      state.userId = action.payload.userId;
-      state.emailAddress = action.payload.emailAddress;
+      state.name = action.payload.name;
       state.isSignedIn = true;
       state.loadingSignIn = false;
       console.log("success");
     },
     signOut(state) {
-      state.userId = undefined;
-      state.emailAddress = undefined;
+      state.name = undefined;
       state.isSignedIn = false;
       state.loadingSignIn = false;
     },

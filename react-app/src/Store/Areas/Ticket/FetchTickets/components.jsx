@@ -9,7 +9,7 @@ export const EventsListener = () => {
     getEventsStateSelector
   );
   const { isSignedIn } = useSelector(userStateSelector);
-
+    
   console.log(events);
   React.useEffect(() => {
     if (!fetched && !loading && isSignedIn)

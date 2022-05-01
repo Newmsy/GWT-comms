@@ -1,29 +1,36 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createEventActions, createEventStateSelector } from "./state";
+import {userStateSelector} from "../../User/state"
 
 export const useCreateEvent = () => {
   const dispatch = useDispatch();
-  const { userId, emailAddress, loading } = useSelector(
+  const { loading } = useSelector(
     createEventStateSelector
   );
+  const { name } = useSelector(
+    userStateSelector
+  );
+  console.log(name)
 
   const createEvent = React.useCallback(
-    ({ date, eventInfo }) => {
+    ({ title, description, isInSprint, eta }) => {
       console.log("Called create event");
       dispatch(
         createEventActions.createEvent({
-          date: date,
-          eventInfo: eventInfo,
+          title: title,
+          description: description,
+          isInSprint: isInSprint,
+          etaDays: eta, 
+          createdBy: name
         })
       );
     },
-    [dispatch]
+    [dispatch, name]
   );
 
   return {
-    emailAddress,
-    userId,
+    name,
     loading,
     createEvent,
   };

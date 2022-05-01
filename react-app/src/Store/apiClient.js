@@ -86,10 +86,6 @@ class ApiClient {
 }
 
 class HookApiClient {
-  constructor({ token, apiUrl }) {
-    this.token = token;
-    this.apiUrl = apiUrl;
-  }
 
   async get(url, shouldHandleErrors = true) {
     const response = await this.authorisedFetch(url, {
@@ -148,7 +144,7 @@ class HookApiClient {
   async authorisedFetch(url, options) {
     if (options.headers == null) options.headers = {};
 
-    return await fetch(`${this.getBaseUrl()}${url}`, options);
+    return await fetch(`${this.getBaseUrl()}/${url}`, options);
   }
   getBaseUrl() {
     return baseUrl;

@@ -6,18 +6,14 @@ import { ParseApiDateString } from "../../../../Utils/DateUtils";
 function* fetchEventsWorker() {
   const apiClient = new ApiClient();
 
-  const response = yield apiClient.get("/api/CalendarEvent/getall", false);
+  const response = yield apiClient.get("/api/ticket/getall", false);
 
   if (response?.ok) {
     const data = yield response.json();
 
-    const eventData = yield data.data.map((x) => {
-      return { events: JSON.parse(x.json), date: ParseApiDateString(x.date) };
-    });
-    yield console.log(eventData);
-
-    if (eventData.length > 0)
-      yield put(getEventsActions.fetchEventsSuccess({ events: eventData }));
+    
+   
+      yield put(getEventsActions.fetchEventsSuccess({ tickets: data.data }));
   }
 }
 

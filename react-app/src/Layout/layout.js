@@ -1,23 +1,23 @@
 import React from "react";
-import { useCreateEvent } from "../Store/Areas/Events/CreateEvent/hooks";
+import { useCreateEvent } from "../Store/Areas/Ticket/CreateTicket/hooks";
 import { useSignInUser } from "../Store/Areas/User/hooks";
 import { SignInModal } from "../Components/SignInModal";
-import { CreateEventModal } from "../Components/CreateEventModal";
+import { CreateTicketModal } from "../Components/CreateTicketModal";
 import { Sidebar } from "./sidebar";
 import { Box } from "@mui/material";
-import { useEvents } from "../Store/Areas/Events/FetchEvents/hooks";
-import { SavedEventsModal } from "../Components/UpcomingEventsModal";
+import { useEvents } from "../Store/Areas/Ticket/FetchTickets/hooks";
+import { SavedTicketsModal } from "../Components/UpcomingEventsModal";
 
 export const Layout = (props) => {
   const { createEvent } = useCreateEvent();
 
   const { setViewDate, fetchEvents } = useEvents();
-  const { isSignedIn, signIn, loadingSignIn, emailAddress, signOut } =
+  const { isSignedIn, signIn, loadingSignIn, name, signOut } =
     useSignInUser();
 
   const [signInOpen, setSignInOpen] = React.useState(false);
   const [createEventOpen, setCreateEventOpen] = React.useState(false);
-  const [savedEventsOpen, setSavedEventsOpen] = React.useState(false);
+  const [SavedTicketsOpen, setSavedTicketsOpen] = React.useState(false);
 
   return (
     <div>
@@ -27,14 +27,14 @@ export const Layout = (props) => {
         onSubmit={signIn}
         onClose={() => setSignInOpen(false)}
       />
-      <CreateEventModal
+      <CreateTicketModal
         open={isSignedIn && createEventOpen}
         onClose={() => setCreateEventOpen(false)}
         onSubmit={createEvent}
       />
-      <SavedEventsModal
-        open={savedEventsOpen}
-        onClose={() => setSavedEventsOpen(false)}
+      <SavedTicketsModal
+        open={SavedTicketsOpen}
+        onClose={() => setSavedTicketsOpen(false)}
       />
       <div style={{ maxWidth: "100vw", zIndex: 100 }}>
         <header
@@ -46,7 +46,7 @@ export const Layout = (props) => {
               <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li>
                   <a href="#" className="nav-link px-2 text-white fs-3">
-                    <b>KPMG Hybrid Calendar</b>
+                    <b>GloWTrack Ticket Tracker</b>
                   </a>
                 </li>
                 <li>
@@ -55,23 +55,23 @@ export const Layout = (props) => {
                       className="nav-link px-2 text-white fs-3"
                       style={{ marginLeft: 200 }}
                     >
-                      {emailAddress}
+                      {name}
                     </a>
                   )}
                 </li>
               </ul>
 
               <div className="text-end">
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-light me-4"
                   onClick={() => {
-                    setSavedEventsOpen(true);
+                    setSavedTicketsOpen(true);
                   }}
                   disabled={!isSignedIn}
                 >
                   Upcoming Events
-                </button>
+                </button> */}
                 <button
                   type="button"
                   className="btn btn-light me-4"
@@ -80,7 +80,7 @@ export const Layout = (props) => {
                   }}
                   disabled={!isSignedIn}
                 >
-                  Create Event
+                  Add Item
                 </button>
 
                 <button
@@ -98,8 +98,7 @@ export const Layout = (props) => {
           </div>
         </header>
       </div>
-      <Box display="flex" flexDirection="row" style={{ width: "100vw" }}>
-        <Sidebar setViewDate={setViewDate} />
+      <Box display="flex"  style={{ width: "100vw" }}>
         {props.children}
       </Box>
     </div>

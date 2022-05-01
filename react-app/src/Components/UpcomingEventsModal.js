@@ -3,7 +3,7 @@ import { getTreeViewUtilityClass, StaticDatePicker } from "@mui/lab";
 import React from "react";
 import { FormatDateString } from "../Utils/DateUtils";
 import { useToastDispatcher } from "../Store/Areas/Toast/hooks";
-import { useSavedEvents } from "../Store/Areas/Events/SavedEvents/hooks";
+import { useSavedTickets } from "../Store/Areas/Ticket/SavedTickets/hooks";
 
 const style = {
   position: "absolute",
@@ -18,9 +18,9 @@ const style = {
   p: 4,
 };
 
-export const SavedEventsModal = ({ open, onClose }) => {
+export const SavedTicketsModal = ({ open, onClose }) => {
   const { addToast } = useToastDispatcher();
-  const { events, removeEventByTitle } = useSavedEvents();
+  const { events, removeEventByTitle } = useSavedTickets();
 
   return (
     <Modal open={open} onClose={onClose}>

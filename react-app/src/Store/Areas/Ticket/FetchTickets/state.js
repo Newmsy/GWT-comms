@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  userId: "",
-  emailAddress: "",
   loading: false,
   fetched: false,
-  events: [],
-  viewDate: new Date(),
+  tickets: [],
 };
 
 const getEventsSlice = createSlice({
@@ -20,10 +17,7 @@ const getEventsSlice = createSlice({
       console.log("success");
       state.loading = false;
       state.fetched = true;
-      state.events = action.payload.events;
-    },
-    setViewDate(state, action) {
-      state.viewDate = action.payload;
+      state.tickets = action.payload.tickets;
     },
   },
 });

@@ -12,7 +12,7 @@ import { getTreeViewUtilityClass, StaticDatePicker } from "@mui/lab";
 import React from "react";
 import { FormatDateString } from "../Utils/DateUtils";
 import { useToastDispatcher } from "../Store/Areas/Toast/hooks";
-import { useEvents } from "../Store/Areas/Events/FetchEvents/hooks";
+import { useEvents } from "../Store/Areas/Ticket/FetchTickets/hooks";
 
 const style = {
   position: "absolute",
@@ -21,53 +21,44 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 700,
   height: 800,
+  maxHeight: "80vh",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
-export const CreateEventModal = ({ open, onClose, onSubmit }) => {
+export const CreateTicketModal = ({ open, onClose, onSubmit }) => {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [location, setLocation] = React.useState("CSQ");
-  const [isDepartmentWide, setIsDepartmentWide] = React.useState(true);
-  const [date, setDate] = React.useState(new Date());
+
+  const [isInSprint, setIsInSprint] = React.useState(true);
+  const [eta, setEta] = React.useState(0);
+
   const { fetchEvents } = useEvents();
-  console.log(location);
+
 
   const { addToast } = useToastDispatcher();
 
   const onSubmitEvent = React.useCallback(async () => {
     await onSubmit({
-      eventInfo: {
         title: title,
         description: description,
-        date: date,
-        location: location,
-        isDepartmentWide: isDepartmentWide,
-      },
-      date: date,
+        isInSprint: isInSprint,
+        eta: eta
     });
     onClose();
-    fetchEvents();
-    addToast(`New event has been created for ${FormatDateString(date)}`);
-  }, [
-    addToast,
-    date,
-    description,
-    isDepartmentWide,
-    location,
-    onClose,
-    onSubmit,
-    title,
-  ]);
+    setTimeout(()=>{fetchEvents();}, 2000)
+    
+    addToast(`New ticket has been created!`);
+  }, [addToast, description, eta, fetchEvents, isInSprint, onClose, onSubmit, title]);
 
   return (
     <Modal open={open} onClose={onClose}>
+      <div style={{padding: 50}}>
       <Paper sx={style} style={{ overflowY: "scroll" }}>
         <Box display="flex" justifyContent="center" flexDirection={"column"}>
-          <p style={{ fontSize: 30 }}>Event Title</p>
+          <p style={{ fontSize: 30 }}>Title</p>
           <Input
             style={{ marginBottom: 30 }}
             onChange={(e) => setTitle(e.target.value)}
@@ -79,55 +70,35 @@ export const CreateEventModal = ({ open, onClose, onSubmit }) => {
             multiline
             rows={4}
           />
-          <p style={{ fontSize: 30 }}>
-            Date{" "}
-            <span style={{ color: "#9c9c9c" }}>
-              &nbsp; &nbsp; &nbsp; {FormatDateString(date)}
-            </span>
-          </p>
-          <StaticDatePicker
-            onChange={(newValue) => {
-              setDate(newValue);
-            }}
-            displayStaticWrapperAs="desktop"
-            renderInput={(params) => <TextField {...params} />}
-            value={date}
+          <p style={{ fontSize: 30 }}>ETA (days)</p>
+          <Input
+            style={{ marginBottom: 30 }}
+            onChange={(e) => setEta(e.target.value)}
+            type="number"
+            value={eta}
           />
-          <p style={{ fontSize: 30 }}>Location</p>
-          <Select
-            onChange={(e) => {
-              setLocation(e.target.value);
-            }}
-            value={location}
-          >
-            <MenuItem value={"CSQ"}>CSQ</MenuItem>
-            <MenuItem value={"Manchester"}>Manchester</MenuItem>
-            <MenuItem value={"Birmingham"}>Birmingham</MenuItem>
-            <MenuItem value={"Watford"}>Watford</MenuItem>
-            <MenuItem value={"Malta"}>Malta</MenuItem>
-          </Select>
 
-          <p style={{ fontSize: 30, marginTop: 30 }}>Event Type</p>
+          <p style={{ fontSize: 30, marginTop: 30 }}>Included in current sprint?</p>
           <Box>
             <Box display="flex" flexDirection="row" alignItems="center">
               <Radio
-                checked={isDepartmentWide === true}
-                onChange={() => setIsDepartmentWide(getTreeViewUtilityClass)}
+                checked={isInSprint === true}
+                onChange={() => setIsInSprint(true)}
                 value="a"
                 name="radio-buttons"
                 inputProps={{ "aria-label": "A" }}
               />
-              <p style={{ fontSize: 16, marginTop: 16 }}>Firm Wide</p>
+              <p style={{ fontSize: 16, marginTop: 16 }}>Yes</p>
             </Box>
             <Box display="flex" flexDirection="row">
               <Radio
-                checked={isDepartmentWide === false}
-                onChange={() => setIsDepartmentWide(false)}
+                checked={isInSprint === false}
+                onChange={() => setIsInSprint(false)}
                 value="b"
                 name="radio-buttons"
                 inputProps={{ "aria-label": "B" }}
               />
-              <p style={{ fontSize: 16, marginTop: 16 }}>Department Wide</p>
+              <p style={{ fontSize: 16, marginTop: 16 }}>No</p>
             </Box>
           </Box>
 
@@ -143,12 +114,13 @@ export const CreateEventModal = ({ open, onClose, onSubmit }) => {
                 className="btn btn-success"
                 onClick={onSubmitEvent}
               >
-                Create Event
+                Create Item
               </button>
             </div>
           </Box>
         </Box>
       </Paper>
+      </div>
     </Modal>
   );
 };

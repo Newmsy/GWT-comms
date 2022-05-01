@@ -4,14 +4,14 @@ import { userActions, userStateSelector } from "./state";
 
 export const useFetchUser = () => {
   const dispatch = useDispatch();
-  const { userId, emailAddress, loading } = useSelector(userStateSelector);
+  const { userId, name, loading } = useSelector(userStateSelector);
 
   const fetchUser = React.useCallback(() => {
-    dispatch(userActions.fetchUser({ email: emailAddress }));
-  }, [dispatch, emailAddress]);
+    dispatch(userActions.fetchUser({ email: name }));
+  }, [dispatch, name]);
 
   return {
-    emailAddress,
+    name,
     userId,
     loading,
     fetchUser,
@@ -20,12 +20,13 @@ export const useFetchUser = () => {
 
 export const useSignInUser = () => {
   const dispatch = useDispatch();
-  const { userId, loadingSignIn, emailAddress, isSignedIn } =
+  const { userId, loadingSignIn, name, isSignedIn } =
     useSelector(userStateSelector);
 
   const signIn = React.useCallback(
-    ({ email, password }) => {
-      dispatch(userActions.signIn({ email: email, password: password }));
+    ({ name }) => {
+      console.log(name)
+      dispatch(userActions.signIn({ name: name }));
     },
     [dispatch]
   );
@@ -34,7 +35,7 @@ export const useSignInUser = () => {
   }, [dispatch]);
 
   return {
-    emailAddress,
+    name,
     userId,
     loadingSignIn,
     signIn,
