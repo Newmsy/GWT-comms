@@ -3,15 +3,12 @@ import { useCreateEvent } from "../Store/Areas/Ticket/CreateTicket/hooks";
 import { useSignInUser } from "../Store/Areas/User/hooks";
 import { SignInModal } from "../Components/SignInModal";
 import { CreateTicketModal } from "../Components/CreateTicketModal";
-import { Sidebar } from "./sidebar";
 import { Box } from "@mui/material";
-import { useEvents } from "../Store/Areas/Ticket/FetchTickets/hooks";
 import { SavedTicketsModal } from "../Components/UpcomingEventsModal";
 
 export const Layout = (props) => {
   const { createEvent } = useCreateEvent();
 
-  const { setViewDate, fetchEvents } = useEvents();
   const { isSignedIn, signIn, loadingSignIn, name, signOut } =
     useSignInUser();
 
@@ -45,7 +42,7 @@ export const Layout = (props) => {
             <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li>
-                  <a href="#" className="nav-link px-2 text-white fs-3">
+                  <a href="/" className="nav-link px-2 text-white fs-3">
                     <b>GloWTrack Ticket Tracker</b>
                   </a>
                 </li>
@@ -54,6 +51,7 @@ export const Layout = (props) => {
                     <a
                       className="nav-link px-2 text-white fs-3"
                       style={{ marginLeft: 200 }}
+                      href="/"
                     >
                       {name}
                     </a>

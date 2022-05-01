@@ -1,7 +1,6 @@
 import { takeLatest, put } from "redux-saga/effects";
 import { getEventsActions } from "./state";
 import { ApiClient } from "../../../apiClient";
-import { ParseApiDateString } from "../../../../Utils/DateUtils";
 
 function* fetchEventsWorker() {
   const apiClient = new ApiClient();

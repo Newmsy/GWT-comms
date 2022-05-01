@@ -2,28 +2,16 @@ import React from "react";
 import { useEvents } from "../../Store/Areas/Ticket/FetchTickets/hooks";
 import {
   Box,
-  Grid,
   Paper,
-  Input,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
   Button,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { dummyData } from "../../constants";
-import { FormatDateString, GetApiDateString } from "../../Utils/DateUtils";
-import DoneIcon from "@mui/icons-material/Done";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { useSavedTickets } from "../../Store/Areas/Ticket/SavedTickets/hooks";
-import { useSignInUser } from "../../Store/Areas/User/hooks";
+import { FormatDateString } from "../../Utils/DateUtils";
 import { EditTicketModal } from "../../Components/EditTicketModal";
 
 export const Calendar = () => {
-  const { viewDate, tickets } = useEvents();
+  const { tickets } = useEvents();
   const styles = useStyles();
-  const { isSignedIn } = useSignInUser();
   const [editingItem, setEditingItem] = React.useState(null);
 
   const sprintTickets = React.useMemo(()=>{

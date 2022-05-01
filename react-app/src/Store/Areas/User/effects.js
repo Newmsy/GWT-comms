@@ -23,7 +23,7 @@ export function* userWatcher() {
 }
 
 function* signInUserWorker(action) {
-  const apiClient = new ApiClient();
+  //const apiClient = new ApiClient();
 
   // const response = yield apiClient.post(
   //   "/api/user/login",

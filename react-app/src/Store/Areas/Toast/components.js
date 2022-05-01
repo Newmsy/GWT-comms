@@ -2,7 +2,7 @@ import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import { useToastConsumer } from "./hooks";
 import { useToastDispatcher } from "./hooks";
-import { makeStyles, Typography, Box, Slide, Theme } from "@material-ui/core";
+import { makeStyles, Typography, Box, Slide } from "@material-ui/core";
 import { ReactComponent as Tick } from "../../../Assets/Tick.svg";
 
 function TransitionLeft(props) {

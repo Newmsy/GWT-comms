@@ -1,8 +1,6 @@
 import { Modal, Box, Paper, Divider } from "@mui/material";
-import { getTreeViewUtilityClass, StaticDatePicker } from "@mui/lab";
 import React from "react";
 import { FormatDateString } from "../Utils/DateUtils";
-import { useToastDispatcher } from "../Store/Areas/Toast/hooks";
 import { useSavedTickets } from "../Store/Areas/Ticket/SavedTickets/hooks";
 
 const style = {
@@ -19,8 +17,7 @@ const style = {
 };
 
 export const SavedTicketsModal = ({ open, onClose }) => {
-  const { addToast } = useToastDispatcher();
-  const { events, removeEventByTitle } = useSavedTickets();
+  const { events } = useSavedTickets();
 
   return (
     <Modal open={open} onClose={onClose}>
