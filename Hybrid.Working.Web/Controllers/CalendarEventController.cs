@@ -18,6 +18,18 @@ namespace Hybrid.Working.Web.Controllers
         {
             return Ok(await Mediator.Send(new GetCalendarEventsRequest { Date = date }));
         }
+        
+        [HttpPut("event")]
+        public async Task<IActionResult> Update(EditEventRequest request)
+        {
+            return Ok(await Mediator.Send(request));
+        }
+        
+        [HttpDelete("event")]
+        public async Task<IActionResult> Delete(DeleteEventRequest request)
+        {
+            return Ok(await Mediator.Send(request));
+        }
 
         [HttpPost("event")]
         public async Task<IActionResult> Post(CreateCalendarEventRequest request)
